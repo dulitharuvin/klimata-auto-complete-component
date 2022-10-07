@@ -1,6 +1,14 @@
-div.auto-complete-container{
-    margin: 0 auto;
-    width: 300%;
+div.auto-complete-container {
+  margin: 0 auto;
+  width: 25%;
+
+  & form {
+    width: 100%;
+
+    & input {
+      width: 100%;
+    }
+  }
 }
 
 ul {

@@ -11,7 +11,9 @@ import { FetchDataService } from '../fetch-data.service';
   styleUrls: ['./auto-complete.component.scss'],
 })
 export class AutoCompleteComponent implements OnInit {
-  formGroup: FormGroup;
+  formGroup: FormGroup = this.formBuilder.group({
+    ingredientName: [''],
+  });
 
   subject: Subject<any> = new Subject();
 
@@ -24,11 +26,7 @@ export class AutoCompleteComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private fetchDataService: FetchDataService
-  ) {
-    this.formGroup = this.formBuilder.group({
-      foodAutoComplete: [this.selectedIngredient?.name],
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getIngredientList();
@@ -50,8 +48,10 @@ export class AutoCompleteComponent implements OnInit {
     this.subject.next(event.target.value);
   }
 
-  selectFood(ingredient: Ingredient) {
+  selectIngredient(ingredient: Ingredient) {
     this.selectedIngredient = ingredient;
+    this.formGroup.get('ingredientName')?.setValue(ingredient.name);
+    this.autoCompleteResults = [];
   }
 
   ngOnDestroy() {
