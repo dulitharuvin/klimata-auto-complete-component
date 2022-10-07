@@ -1,0 +1,8 @@
+<div class="auto-complete-container">
+    <form [formGroup]="formGroup">
+        <input type="text" formControlName="foodAutoComplete" (keyup)="searchForFood($event)" />
+    </form>
+    <ul>
+        <li *ngFor="let ingredient of autoCompleteResults" (click)="selectFood(ingredient)">{{ingredient.name}}</li>
+    </ul>
+</div>
